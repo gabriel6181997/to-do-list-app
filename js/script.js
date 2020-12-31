@@ -38,7 +38,8 @@ button.addEventListener('click',(e)=>{
 for(let i=0; i<li.length; i++){
   li[i].addEventListener('click',(e)=>{
     e.preventDefault();
-    const target = e.target;
+    //add .parentnode to ensure that .checked class is not added to span when the task is clicked
+    const target = e.target.parentNode;
     target.classList.toggle('checked');
   });
 };
@@ -51,6 +52,8 @@ for(let u=0; u<li.length;u++){
   span.appendChild(cross);
   li[u].appendChild(span);
 };
+
+
 
 
 
