@@ -63,9 +63,10 @@ ul li:not(.checked):hover {
   color: #fff;
   text-decoration: line-through;
   border: 1px solid #fff;
+  transition: all 0.3s ease 0;
 }
 
-.checked::after {
+.checked::before {
   content: "";
   position: absolute;
   border-color: #fff;
@@ -81,9 +82,15 @@ ul li:not(.checked):hover {
 .close {
   position: absolute;
   content: "\u00D7";
-  width: 10px;
+  font-weight: bold;
   height: 10px;
-  right: 0;
-  top: 0;
-  padding: 12px 16px;
+  right: 0%;
+  top: 0%;
+  padding: 10px 14px 29px 16px;
+  transition: all 0.3s ease 0;
+}
+
+.close:hover {
+  color: #fff;
+  background-color: red;
 }

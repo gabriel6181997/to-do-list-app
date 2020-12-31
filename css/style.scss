@@ -54,14 +54,6 @@ ul{
     border: 1px solid #F0ADA7;
     position: relative;
     transition: 0.2s;
-
-    // &::after{
-    //   content: "x";
-    //   position: absolute;
-    //   top: 30%;
-    //   right: 10%;
-    // }
-
     
     &:not(.checked):hover{
       background: #ddd;
@@ -70,7 +62,6 @@ ul{
     // &:nth-child(odd){
     //   background:#6BB2CC;
     // }
-
   }
 }
 
@@ -79,8 +70,9 @@ ul{
   color: #fff;
   text-decoration: line-through;
   border: 1px solid #fff;
+  transition: all 0.3s ease 0;
 
-  &::after{
+  &::before{
     content: "";
     position: absolute;
     border-color: #fff;
@@ -97,9 +89,16 @@ ul{
 .close{
   position: absolute;
   content: "\u00D7";
-  width: 10px;
+  font-weight: bold;
   height: 10px;
-  right: 0;
-  top: 0;
-  padding: 12px 16px;
+  right: 0%;
+  top: 0%;
+  padding: 10px 14px 29px 16px;
+  transition: all 0.3s ease 0;
+  
+  &:hover{
+    color: #fff;
+    background-color: red;
+  }
+
 }
