@@ -14,7 +14,7 @@ button.addEventListener('click',(e)=>{
     
     //Add(remove) class .checked to(from) new list item
     newli.addEventListener('click',()=>{
-      newli.classList.toggle('checked');
+    newli.classList.toggle('checked');
     });
     
     //Back to data input
