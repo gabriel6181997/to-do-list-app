@@ -4,7 +4,7 @@ const input = document.getElementById('myinput');
 const ul = document.getElementById('myUL');
 const li = ul.getElementsByTagName('li');
 
-//Click event for new list item
+//Click event for each new list item
 button.addEventListener('click',(e)=>{
   e.preventDefault();
   if(input.value !==''){
@@ -12,7 +12,7 @@ button.addEventListener('click',(e)=>{
     const newli = document.createElement('li');
     newli.textContent = input.value;
     
-    //Add(remove) class .checked to(from) new list item
+    //Add(remove) class .checked to(from) each new list item
     newli.addEventListener('click',()=>{
     newli.classList.toggle('checked');
     });
@@ -22,7 +22,7 @@ button.addEventListener('click',(e)=>{
     ul.insertAdjacentText = ('afterend', newli);
     input.value = "";
     
-    //Create cross button for new list item
+    //Create cross button for each new list item
     const span = document.createElement('span');
     const cross = document.createTextNode("\u00D7");
     span.className = "close";
@@ -34,7 +34,7 @@ button.addEventListener('click',(e)=>{
 }); 
 
 
-//Create cross button for old list item
+//Create cross button for each old list item
 for(let u=0; u<li.length;u++){
   const span = document.createElement('span');
   const cross = document.createTextNode("\u00D7");
@@ -43,7 +43,7 @@ for(let u=0; u<li.length;u++){
   li[u].appendChild(span);
 };
 
-//Add(remove) class .checked to (from) old list item
+//Add(remove) class .checked to (from) each old list item
 for(let i=0; i<li.length; i++){
   li[i].addEventListener('click',(e)=>{
     e.preventDefault();
@@ -54,8 +54,14 @@ for(let i=0; i<li.length; i++){
   });
 };
 
-
-//Delete task
+//Delete old list item
+const closeBtn = document.getElementsByTagName('span');
+for(let v=0; v<closeBtn.length; v++){
+  closeBtn[v].addEventListener('click',(e)=>{
+   e.preventDefault();
+   closeBtn[v].parentNode.remove(li);
+  })
+}
 
 
 
