@@ -28,6 +28,11 @@ button.addEventListener('click',(e)=>{
     span.className = "close";
     span.appendChild(cross);
     newli.appendChild(span);
+
+    //Delete new list item
+    span.addEventListener('click',()=>{
+      span.parentNode.remove('li');
+    });
   } else{
     alert('タスクを入力してください');
   }
@@ -47,6 +52,7 @@ for(let u=0; u<li.length;u++){
 for(let i=0; i<li.length; i++){
   li[i].addEventListener('click',(e)=>{
     e.preventDefault();
+    /// Use .nodeName to ensure that class .checked can be added to list tag only
     if(e.target.nodeName === 'LI') {
       const target = e.target;
       target.classList.toggle('checked');      
@@ -60,8 +66,8 @@ for(let v=0; v<closeBtn.length; v++){
   closeBtn[v].addEventListener('click',(e)=>{
    e.preventDefault();
    closeBtn[v].parentNode.remove(li);
-  })
-}
+  });
+};
 
 
 
