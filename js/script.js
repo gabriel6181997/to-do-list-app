@@ -1,8 +1,24 @@
-//Define parameter 
+//Define parameter for all functions
 const button = document.getElementById('button');
 const input = document.getElementById('myinput');
 const ul = document.getElementById('myUL');
 const li = ul.getElementsByTagName('li');
+
+//Get data from JSON file (WebAPI)
+window.addEventListener("load", getTasks);
+async function getTasks() {
+  try{
+    const res = await fetch("https://jsonplaceholder.typicode.com/todos",{
+      method: "GET",
+    });
+    const tasks = await res.json();
+    // console.log(tasks);
+    return tasks;
+  } catch(error){
+    alert("読み込みに失敗しました。時間が経ってから再度お試しください。");
+  }
+}
+
 
 //Click event for each new list item
 button.addEventListener('click',(e)=>{
@@ -58,8 +74,7 @@ button.addEventListener('click',(e)=>{
     e.parentNode.remove();
   }
   
-  
-  //Add(remove) class .checked to (from) each old list item (need to be changed)
+//Add(remove) class .checked to (from) each old list item (REFACTORIZATION IS REQUIRED)
   for(let i=0; i<li.length; i++){
     li[i].addEventListener('click',(e)=>{
       e.preventDefault();
@@ -69,22 +84,34 @@ button.addEventListener('click',(e)=>{
         target.classList.toggle('checked');      
       }
     });
-  };
-  
-  //Get data from JSON file
-  async function getTasks(){
-    try{
-      const res = await fetch("https://jsonplaceholder.typicode.com/todos",{
-        method:"GET",
-      });
-      const tasks = await res.json();
-      return tasks;
-    } catch(error){
-      alert("読み込みに失敗しました。時間が経ってから再度お試しください。");
-    }
-  }
+ }
+
+//Define function createTask
+function createTask(task){
+  const liJSON = document.createElement("li");
+  const spanJSON = document.createElement("span");
+  const crossJSON = document.createTextNode("\u00D7");
+  spanJSON.className = "close";
+  spanJSON.appendChild(crossJSON);
+  liJSON.appendChild(spanJSON);
+  //Add iDelete function
+  spanJSON.setAttribute("onclick","liDelete(this)")
+}
+
+//Create Tasks by using data from JSON file
+window.addEventListener("load", createTasks);
+async function createTasks(){
+  const tasks = await getTasks();
+  tasks.forEach(function(task){
+    console.log(task);
+    // const taskJSON = createTask(task);
+
+  });
+}
+
 
   
+
 //Delete old list item (NOT USED)
 // const closeBtn = document.getElementsByTagName('span');
 // for(let v=0; v<closeBtn.length; v++){
