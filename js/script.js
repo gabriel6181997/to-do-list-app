@@ -4,7 +4,6 @@ const input = document.getElementById('myinput');
 const ul = document.getElementById('myUL');
 const li = ul.getElementsByTagName('li');
 
-
 //Click event for each new list item
 button.addEventListener('click',(e)=>{
   e.preventDefault();
@@ -33,7 +32,7 @@ button.addEventListener('click',(e)=>{
     span.appendChild(cross);
     newli.appendChild(span);
     
-    //Delete new list item (not used)
+    //Delete new list item (NOT USED)
     // span.addEventListener('click',()=>{
       //   span.parentNode.remove('li');
       // });
@@ -72,7 +71,7 @@ button.addEventListener('click',(e)=>{
     }
   }
 
-//Add(remove) class .checked to (from) each old list item
+//Add(remove) class .checked to (from) each old list item (NOT USED)
 // for(let i=0; i<li.length; i++){
 //   li[i].addEventListener('click',(e)=>{
 //     e.preventDefault();
@@ -84,7 +83,7 @@ button.addEventListener('click',(e)=>{
 //   });
 // };
 
-//Delete old list item
+//Delete old list item (NOT USED)
 // const closeBtn = document.getElementsByTagName('span');
 // for(let v=0; v<closeBtn.length; v++){
 //   closeBtn[v].addEventListener('click',(e)=>{
