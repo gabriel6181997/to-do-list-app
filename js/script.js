@@ -58,6 +58,19 @@ button.addEventListener('click',(e)=>{
     e.parentNode.remove();
   }
   
+  
+  //Add(remove) class .checked to (from) each old list item (need to be changed)
+  for(let i=0; i<li.length; i++){
+    li[i].addEventListener('click',(e)=>{
+      e.preventDefault();
+      /// Use .nodeName to ensure that class .checked can be added to list tag only
+      if(e.target.nodeName === 'LI') {
+        const target = e.target;
+        target.classList.toggle('checked');      
+      }
+    });
+  };
+  
   //Get data from JSON file
   async function getTasks(){
     try{
@@ -71,18 +84,7 @@ button.addEventListener('click',(e)=>{
     }
   }
 
-//Add(remove) class .checked to (from) each old list item (NOT USED)
-// for(let i=0; i<li.length; i++){
-//   li[i].addEventListener('click',(e)=>{
-//     e.preventDefault();
-//     /// Use .nodeName to ensure that class .checked can be added to list tag only
-//     if(e.target.nodeName === 'LI') {
-//       const target = e.target;
-//       target.classList.toggle('checked');      
-//     } return
-//   });
-// };
-
+  
 //Delete old list item (NOT USED)
 // const closeBtn = document.getElementsByTagName('span');
 // for(let v=0; v<closeBtn.length; v++){
