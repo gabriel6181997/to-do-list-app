@@ -24,15 +24,18 @@ button.addEventListener('click',(e)=>{
     
     //Create cross button for each new list item
     const span = document.createElement('span');
+    //Add liDelete function
+    span.setAttribute("onclick","liDelete(this)");
+    //Back to the creation of cross button
     const cross = document.createTextNode("\u00D7");
     span.className = "close";
     span.appendChild(cross);
     newli.appendChild(span);
 
     //Delete new list item
-    span.addEventListener('click',()=>{
-      span.parentNode.remove('li');
-    });
+    // span.addEventListener('click',()=>{
+    //   span.parentNode.remove('li');
+    // });
   } else{
     alert('タスクを入力してください');
   }
@@ -46,28 +49,37 @@ for(let u=0; u<li.length;u++){
   span.className = "close";
   span.appendChild(cross);
   li[u].appendChild(span);
+  span.setAttribute("onclick","liDelete(this)");
 };
+
+//Define liDelete function
+function liDelete(e){
+  e.parentNode.remove();
+}
+
 
 //Add(remove) class .checked to (from) each old list item
-for(let i=0; i<li.length; i++){
-  li[i].addEventListener('click',(e)=>{
-    e.preventDefault();
-    /// Use .nodeName to ensure that class .checked can be added to list tag only
-    if(e.target.nodeName === 'LI') {
-      const target = e.target;
-      target.classList.toggle('checked');      
-    } return
-  });
-};
+// for(let i=0; i<li.length; i++){
+//   li[i].addEventListener('click',(e)=>{
+//     e.preventDefault();
+//     /// Use .nodeName to ensure that class .checked can be added to list tag only
+//     if(e.target.nodeName === 'LI') {
+//       const target = e.target;
+//       target.classList.toggle('checked');      
+//     } return
+//   });
+// };
 
 //Delete old list item
-const closeBtn = document.getElementsByTagName('span');
-for(let v=0; v<closeBtn.length; v++){
-  closeBtn[v].addEventListener('click',(e)=>{
-   e.preventDefault();
-   closeBtn[v].parentNode.remove(li);
-  });
-};
+// const closeBtn = document.getElementsByTagName('span');
+// for(let v=0; v<closeBtn.length; v++){
+//   closeBtn[v].addEventListener('click',(e)=>{
+//    e.preventDefault();
+//    closeBtn[v].parentNode.remove(li);
+//   });
+// };
+
+
 
 
 
