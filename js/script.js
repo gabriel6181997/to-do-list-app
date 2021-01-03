@@ -18,7 +18,7 @@ async function getTasks() {
   }
 }
 
-//Define function createTask
+//Define function createTask(task)
 function createTask(task){
   const liJSON = document.createElement("li");
   const spanJSON = document.createElement("span");
@@ -28,9 +28,9 @@ function createTask(task){
   liJSON.appendChild(spanJSON);
   liJSON.textContent = task.title;
   //Add iDelete function
-  spanJSON.setAttribute("onclick","liDelete(this)")
+  spanJSON.setAttribute("onclick","liDelete(this)");
   // console.log(spanJSON);
-  console.log(liJSON);
+  return liJSON;
 }
 
 //Create Tasks by using data from JSON file
@@ -41,6 +41,7 @@ async function createTasks(){
     // console.log(task);
     const taskJSON = createTask(task);
     // console.log(taskJSON);
+    ul.appendChild(taskJSON);
   });
 }
 
