@@ -12,13 +12,37 @@ async function getTasks() {
       method: "GET",
     });
     const tasks = await res.json();
-    // console.log(tasks);
     return tasks;
   } catch(error){
     alert("読み込みに失敗しました。時間が経ってから再度お試しください。");
   }
 }
 
+//Define function createTask
+function createTask(task){
+  const liJSON = document.createElement("li");
+  const spanJSON = document.createElement("span");
+  const crossJSON = document.createTextNode("\u00D7");
+  spanJSON.className = "close";
+  spanJSON.appendChild(crossJSON);
+  liJSON.appendChild(spanJSON);
+  liJSON.textContent = task.title;
+  //Add iDelete function
+  spanJSON.setAttribute("onclick","liDelete(this)")
+  // console.log(spanJSON);
+  console.log(liJSON);
+}
+
+//Create Tasks by using data from JSON file
+window.addEventListener("load", createTasks);
+async function createTasks(){
+  const tasks = await getTasks();
+  tasks.forEach(function(task){
+    // console.log(task);
+    const taskJSON = createTask(task);
+    // console.log(taskJSON);
+  });
+}
 
 //Click event for each new list item
 button.addEventListener('click',(e)=>{
@@ -48,11 +72,7 @@ button.addEventListener('click',(e)=>{
     span.appendChild(cross);
     newli.appendChild(span);
     
-    //Delete new list item (NOT USED)
-    // span.addEventListener('click',()=>{
-      //   span.parentNode.remove('li');
-      // });
-    } else{
+  } else{
       alert('タスクを入力してください');
     }
   }); 
@@ -67,14 +87,23 @@ button.addEventListener('click',(e)=>{
     li[u].appendChild(span);
     //Add iDelete function
     span.setAttribute("onclick","liDelete(this)");
+    //Add(remove) class .checked to (from) each old list item
+    // li.setAttribute("onclick","liChecked(this)");
   };
   
   //Define liDelete function
   function liDelete(e){
     e.parentNode.remove();
   }
+
+  //Define liChecked function
+  // function liChecked(e){
+  //   e.preventDefault();
+  //   const target = e.target;
+  //   target.classList.toggle('checked');
+  // }
   
-//Add(remove) class .checked to (from) each old list item (REFACTORIZATION IS REQUIRED)
+//Add(remove) class .checked to (from) each old list item (REFACTORING IS REQUIRED)
   for(let i=0; i<li.length; i++){
     li[i].addEventListener('click',(e)=>{
       e.preventDefault();
@@ -86,40 +115,7 @@ button.addEventListener('click',(e)=>{
     });
  }
 
-//Define function createTask
-function createTask(task){
-  const liJSON = document.createElement("li");
-  const spanJSON = document.createElement("span");
-  const crossJSON = document.createTextNode("\u00D7");
-  spanJSON.className = "close";
-  spanJSON.appendChild(crossJSON);
-  liJSON.appendChild(spanJSON);
-  //Add iDelete function
-  spanJSON.setAttribute("onclick","liDelete(this)")
-}
 
-//Create Tasks by using data from JSON file
-window.addEventListener("load", createTasks);
-async function createTasks(){
-  const tasks = await getTasks();
-  tasks.forEach(function(task){
-    console.log(task);
-    // const taskJSON = createTask(task);
-
-  });
-}
-
-
-  
-
-//Delete old list item (NOT USED)
-// const closeBtn = document.getElementsByTagName('span');
-// for(let v=0; v<closeBtn.length; v++){
-//   closeBtn[v].addEventListener('click',(e)=>{
-//    e.preventDefault();
-//    closeBtn[v].parentNode.remove(li);
-//   });
-// };
 
 
 
