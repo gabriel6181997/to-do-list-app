@@ -103,10 +103,10 @@ async function addTask(e) {
      
 }; 
     
-  button.addEventListener('click', addTask);
+button.addEventListener('click', addTask);
   
-  //Create cross button for each old list item
-  for(let u=0; u<li.length;u++){
+//Create cross button for each old list item
+ for(let u=0; u<li.length;u++){
     const span = document.createElement('span');
     const cross = document.createTextNode("\u00D7");
     span.className = "close";
@@ -116,12 +116,12 @@ async function addTask(e) {
     span.setAttribute("onclick","liDelete(this)");
     //Add(remove) class .checked to (from) each old list item
     // li.setAttribute("onclick","liChecked(this)");
-  };
+ };
   
   //Define liDelete function
-  function liDelete(e){
+function liDelete(e){
     e.parentNode.remove();
-  }
+}
 
   //Define liChecked function
   // function liChecked(e){
@@ -131,16 +131,16 @@ async function addTask(e) {
   // }
   
 //Add(remove) class .checked to (from) each old list item (REFACTORING IS REQUIRED)
-  for(let i=0; i<li.length; i++){
-    li[i].addEventListener('click',(e)=>{
+for(let i=0; i<li.length; i++){
+  li[i].addEventListener('click',(e)=>{
       e.preventDefault();
       /// Use .nodeName to ensure that class .checked can be added to list tag only
       if(e.target.nodeName === 'LI') {
         const target = e.target;
         target.classList.toggle('checked');      
       }
-    });
- }
+  });
+}
 
 
 
