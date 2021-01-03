@@ -38,30 +38,42 @@ window.addEventListener("load", createTasks);
 async function createTasks(){
   const tasks = await getTasks();
   tasks.forEach(function(task){
-    // console.log(task);
     const taskJSON = createTask(task);
-    // console.log(taskJSON);
     ul.appendChild(taskJSON);
   });
 }
 
 //Click event for each new list item
-button.addEventListener('click', addTask);
-
 async function addTask(e) {
   e.preventDefault();
-  
-  // try{
-  //   //try to send data
-  //   const data = {
-  //     userId: 1,
-  //     id: 1,
-      
-  //   };
-  // };
+  const title = input.value;
 
-  if(input.value !==''){
+  if(input.value ==''){
+    alert("タスクを入力してください!");
+    return;
+  }
+  
+  try{
+    const data = {
+      userId: 1,
+      id: 1,
+      completed: true,
+      title:title,
+    };
+
+    const res = await window.fetch(
+      "https://jsonplaceholder.typicode.com/todos",
+      { method:"POST",
+        title: JSON.stringify(data),
+        headers:{
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
+    );
     //Input data
+    const task = await res.json();
+    const taskJSON = createTask(task);
+    ul.prepend(taskJSON);  //NEED to CHECK FROM HERE
     const newli = document.createElement('li');
     newli.textContent = input.value;
     
@@ -73,7 +85,7 @@ async function addTask(e) {
     //Back to data input
     ul.appendChild(newli);
     ul.insertAdjacentText = ('afterend', newli);
-    input.value = "";
+    input.value = "";  //TILL HERE
     
     //Create cross button for each new list item
     const span = document.createElement('span');
@@ -84,12 +96,14 @@ async function addTask(e) {
     span.className = "close";
     span.appendChild(cross);
     newli.appendChild(span);
-    
-  } else{
-      alert('タスクを入力してください');
-    }
+  } catch(error) {
+    //error message
+    alert("データ送信に失敗しました。時間が経ってから再度お試しください。")
+  }
+     
 }; 
-  
+    
+  button.addEventListener('click', addTask);
   
   //Create cross button for each old list item
   for(let u=0; u<li.length;u++){
