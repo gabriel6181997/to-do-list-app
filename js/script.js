@@ -73,7 +73,7 @@ async function addTask(e) {
     //Input data
     const task = await res.json();
     const taskJSON = createTask(task);
-    ul.prepend(taskJSON);
+    ul.prepend(taskJSON);  //NEED to CHECK FROM HERE
     const newli = document.createElement('li');
     newli.textContent = input.value;
     
@@ -85,7 +85,7 @@ async function addTask(e) {
     //Back to data input
     ul.appendChild(newli);
     ul.insertAdjacentText = ('afterend', newli);
-    input.value = "";
+    input.value = "";  //TILL HERE
     
     //Create cross button for each new list item
     const span = document.createElement('span');
