@@ -26,7 +26,7 @@ function createTask(task){
   spanJSON.className = "close";
   spanJSON.appendChild(crossJSON);
   liJSON.appendChild(spanJSON);
-  liJSON.textContent = task.title;
+  liJSON.append(task.title);
   //Add iDelete function
   spanJSON.setAttribute("onclick","liDelete(this)");
   // console.log(spanJSON);
@@ -46,8 +46,20 @@ async function createTasks(){
 }
 
 //Click event for each new list item
-button.addEventListener('click',(e)=>{
+button.addEventListener('click', addTask);
+
+async function addTask(e) {
   e.preventDefault();
+  
+  // try{
+  //   //try to send data
+  //   const data = {
+  //     userId: 1,
+  //     id: 1,
+      
+  //   };
+  // };
+
   if(input.value !==''){
     //Input data
     const newli = document.createElement('li');
@@ -76,7 +88,7 @@ button.addEventListener('click',(e)=>{
   } else{
       alert('タスクを入力してください');
     }
-  }); 
+}; 
   
   
   //Create cross button for each old list item
