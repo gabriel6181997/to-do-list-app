@@ -13,7 +13,8 @@
 }
 
 h1 {
-  font-size: 40px;
+  font-size: clamp(30px, 1rem + 3vw ,40px);
+  font-weight: bold;
   padding: 50px 30px;
 }
 
@@ -29,7 +30,6 @@ input {
   border-radius: 0;
   padding: 20px;
   flex: 4;
-  font-size: 22px;
 }
 
 .addbtn {
@@ -38,6 +38,7 @@ input {
   padding: 18px;
   cursor: pointer;
   transition: all 0.3s ease 0;
+  font-size: 19px;
 }
 
 .addbtn:hover {
@@ -52,6 +53,7 @@ ul li {
   border: 1px solid #F0ADA7;
   position: relative;
   transition: 0.2s;
+  font-size: clamp(10px, 1rem + 1vw, 18px);
 }
 
 ul li:not(.checked):hover {
