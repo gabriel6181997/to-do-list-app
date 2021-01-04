@@ -29,7 +29,10 @@ function createTask(task){
   liJSON.append(task.title);
   //Add iDelete function
   spanJSON.setAttribute("onclick","liDelete(this)");
-  // console.log(spanJSON);
+  //Add (remove) checked class to(from) liJSON 
+  liJSON.addEventListener('click',()=>{
+    liJSON.classList.toggle('checked');
+  });
   return liJSON;
 }
 
@@ -54,6 +57,7 @@ async function addTask(e) {
   }
   
   try{
+    // Pretend to send data to JSON file
     const data = {
       userId: 1,
       id: 1,
@@ -64,18 +68,18 @@ async function addTask(e) {
     const res = await window.fetch(
       "https://jsonplaceholder.typicode.com/todos",
       { method:"POST",
-        title: JSON.stringify(data),
+        body: JSON.stringify(data),
         headers:{
           "Content-type": "application/json; charset=UTF-8",
         },
       }
     );
+    const json = await res.json();
+    console.log(json);
+
     //Input data
-    const task = await res.json();
-    const taskJSON = createTask(task);
-    ul.prepend(taskJSON);  //NEED to CHECK FROM HERE
     const newli = document.createElement('li');
-    newli.textContent = input.value;
+    newli.textContent = title;
     
     //Add(remove) class .checked to(from) each new list item
     newli.addEventListener('click',()=>{
@@ -83,9 +87,9 @@ async function addTask(e) {
     });
     
     //Back to data input
-    ul.appendChild(newli);
+    ul.prepend(newli);
     ul.insertAdjacentText = ('afterend', newli);
-    input.value = "";  //TILL HERE
+    input.value = ""; 
     
     //Create cross button for each new list item
     const span = document.createElement('span');
@@ -103,10 +107,10 @@ async function addTask(e) {
      
 }; 
     
-  button.addEventListener('click', addTask);
+button.addEventListener('click', addTask);
   
-  //Create cross button for each old list item
-  for(let u=0; u<li.length;u++){
+//Create cross button for each old list item
+ for(let u=0; u<li.length;u++){
     const span = document.createElement('span');
     const cross = document.createTextNode("\u00D7");
     span.className = "close";
@@ -116,7 +120,7 @@ async function addTask(e) {
     span.setAttribute("onclick","liDelete(this)");
     //Add(remove) class .checked to (from) each old list item
     // li.setAttribute("onclick","liChecked(this)");
-  };
+ };
   
   //Define liDelete function
   function liDelete(e){
@@ -131,16 +135,16 @@ async function addTask(e) {
   // }
   
 //Add(remove) class .checked to (from) each old list item (REFACTORING IS REQUIRED)
-  for(let i=0; i<li.length; i++){
-    li[i].addEventListener('click',(e)=>{
+for(let i=0; i<li.length; i++){
+  li[i].addEventListener('click',(e)=>{
       e.preventDefault();
       /// Use .nodeName to ensure that class .checked can be added to list tag only
       if(e.target.nodeName === 'LI') {
         const target = e.target;
         target.classList.toggle('checked');      
       }
-    });
- }
+  });
+}
 
 
 
